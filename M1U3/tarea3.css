@@ -1,0 +1,31 @@
+h1 {
+    color: #236194; 
+    font-family: Roboto; 
+    font-size: 38px;
+    font-weight: bolder;
+}
+p {
+    color: #464646;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.destacados{ 
+    color:#fff;
+    font-weight:normal;
+    background-color: #5087b4;
+
+}
+
+.contenedor {
+    display: flex;
+    box-shadow: 0px 8px 8px -6px rgba(92,77,77,0.75);
+}
+
+.item {
+    margin: 30px;
+    height: 30px;
+    font-size: 20px;
+    font-family: Roboto;
+}
