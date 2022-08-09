@@ -61,3 +61,13 @@ h1, h2 {
     text-align: center;
     padding: 50px 20px;
 }
+
+/*fin de testimonio*/
+.historia {
+    background: #c5c6c5;
+    
+}
+/* nosotros*/
+.nosotros {
+    background: #dadada;
+}
