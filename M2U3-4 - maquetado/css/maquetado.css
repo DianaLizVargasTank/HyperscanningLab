@@ -1,3 +1,19 @@
 /*
 font-family: 'Lato', sans-serif;
 */
+footer {
+    background-color: #aaa;
+}
+
+h1,
+h2 {
+    font-family: 'Lato', sans-serif;
+}
+
+.hero {
+    background: url() no repeat;
+    background-size: cover;
+    height: 50vh;
+    min-height: 600px;
+    color: white;
+}
