@@ -11,8 +11,7 @@ h2 {
 }
 
 .hero {
-    background: url(img/AdobeStock_478528634.jpeg) no repeat;
-    background-size: cover;
+    background: #ffff url("/img/AdobeStock_478528634.jpeg") no repeat cover;
     height: 50vh;
     min-height: 600px;
     color: white;
