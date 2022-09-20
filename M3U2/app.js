@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index'); // routes/index.js
+var hyperscanningRouter = require('./routes/hyperscanning'); // routes/hyperscanning.js
+var neurofeedbackRouter = require('./routes/neurofeedback') // routes/neurofeedback.js
+var loginRouter = require('./routes/login') // routes/login.js
 
 var app = express();
 
@@ -20,7 +22,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/hyperscanning', hyperscanningRouter);
+app.use('/neurofeedback', neurofeedbackRouter);
+app.use('/login', loginRouter);
+
+app.get('/prueba',function(req,res){
+  res.send('Hola soy la pagina de Prueba')
+})
+
+app.get('/nosotros',function(req,res){
+  res.send('Hola soy la pagina de Nosotros')
+})
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
