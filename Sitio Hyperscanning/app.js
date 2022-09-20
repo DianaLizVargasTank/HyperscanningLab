@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 require('dotenv').config();
-var pool = require('./models/bd');
+var pool = require('./models/bd.js');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -25,19 +25,48 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// select
-pool.query('select * from usuarios').then(function(resultados){
-  console.log(resultados)
+//select
+pool.query('select * from [usuarios]').then(function (resultados) {
+ console.log(resultados);
 });
+
+//insert
+//var obj = {
+//  nombre:'Flavia',
+//  apellidos: 'Lopez Tralala',
+//  programa: 'UNTBA-2022',
+//  mail: 'flavia.lopez@gmail.com'
+//}
+
+//pool.query('insert into hyperscanning_prueba set ?', [obj]).then(function (resultados) {
+//  console.log(resultados);
+//});
+
+//update
+//var id = 1;
+// var obj ={
+  // nombre: 'Ximena';
+  // apellidos: 'Gomez'
+  //  }
+
+// pool.query('update hyperscanning_prueba set ? where id=?' , [obj, id]).then(function(resultados) {
+//  console.log(resultados);
+//});
+
+//borrar
+// var id = 1;
+//pool.query('delete from hyperscanning_prueba where id=?' , [id]).then(function(resultados) {
+//  console.log(resultados);
+//});
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
