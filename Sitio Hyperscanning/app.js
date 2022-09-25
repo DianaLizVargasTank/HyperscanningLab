@@ -26,7 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //select
-pool.query('select * from [usuarios]').then(function (resultados) {
+pool.query('select * from usuarios').then(function (resultados) {
  console.log(resultados);
 });
 
