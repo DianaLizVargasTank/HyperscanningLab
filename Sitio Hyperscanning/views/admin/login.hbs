@@ -1,0 +1,28 @@
+  <body class="text-center">
+    
+<main class="form-signin w-100 m-auto">
+  <form action="/admin/login" method="post">
+    <img class="mb-4" src="/images/user.png" alt="logo" width=m-auto height="100">
+    <h2 class="h3 mb-3 fw-normal">Ingresar</h2>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="Usuario" name="Usuario" placeholder="name@example.com">
+      <label for="Usuario">Usuario</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
+      <label for="Password">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Recordarme
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
+  {{#if error}}
+  <p> Usuario o Contraseña incorrecto!</p>
+  {{/if}}
+</main>
+</body>
