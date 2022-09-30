@@ -1,12 +1,47 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+var usuariosmodel = require('./../../models/usuariosmodel')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+//endsession
+router.get('/logout', function (req,res,next) {
+  req.session,destroy();
+  res.render('index');
+});
+
+//login
+router.post('/', async (req, res, next) => {
+  try {
+      var usuario = req.body.usuario;
+      var password = req.body.password;
+
+      console.log(req.body);
+
+      var data = await usuariosmodel.getUserByUsernameAndPassword(usuario, password);
+
+      if (data != undefined) {
+          req.session.id_usuario = data.id; 
+          req.session.nombre = data.usuario;
+          res.redirect('/login_sucess');
+      } else {
+          res.render('admin/login', {
+              layout: 'admin/layout',
+              error: true
+          });
+      } //END IF ELSE
+  } catch (error) {
+      console.log(error)
+  }
+});
+
+
+//formulario
 router.post('/', async (req, res, next) => {
 
   console.log(req.body)// estoy capturando algo?

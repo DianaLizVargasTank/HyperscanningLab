@@ -7,6 +7,15 @@ router.get('/', function (req, res, next) {
         layout: 'admin/layout',
     });
 });
+
+//endsession
+router.get('/logout', function (req,res,next) {
+    req.session,destroy();
+    res.render('admin/login',{
+        layout:'admin/layout'
+    });
+});
+//login
 router.post('/', async (req, res, next) => {
     try {
         var usuario = req.body.usuario;

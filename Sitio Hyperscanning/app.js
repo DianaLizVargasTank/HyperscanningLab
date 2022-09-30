@@ -9,6 +9,7 @@ var session = require('express-session');
 var pool = require('./models/bd');
 
 var indexRouter = require('./routes/index');
+var login_sucessRouter = require('./routes/login_sucess');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/novedades');
@@ -35,10 +36,10 @@ app.use(session({
 secured = async (req, res, next) => {
   try{
     console.log(req.session.id_usuario);
-    if (req.session.id_usuario) {
+    if (req.session.id_usuario){
       next();
     } else {
-      res.redirect('/admin/login')
+      res.redirect('/admin/login');
     }
   } catch (error) {
     console.log(error);
@@ -48,6 +49,7 @@ secured = async (req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/login_sucess',login_sucessRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/novedades', secured, adminRouter);
 
