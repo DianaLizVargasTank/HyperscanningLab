@@ -49,7 +49,7 @@ secured = async (req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/login_sucess',login_sucessRouter);
+app.use('/login_sucess',secured, login_sucessRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/novedades', secured, adminRouter);
 
