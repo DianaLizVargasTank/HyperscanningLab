@@ -5,8 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 require('dotenv').config();
-var session = require('express-session')
-//var pool = require('./models/bd');
+var session = require('express-session');
+var pool = require('./models/bd');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -26,48 +26,64 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-secret:'',
-resave:false,
-saveUninitialized: true
+  secret: '33308100+Ge',
+  resave: false,
+  saveUninitialized: true
 
-}))
+}));
+
+secured = async (req, res, next) => {
+  try{
+    console.log(req.session.id_usuario);
+    if (req.session.id_usuario) {
+      next();
+    } else {
+      res.redirect('/admin/login')
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
-app.use('/admin/novedades', adminRouter);
+app.use('/admin/novedades', secured, adminRouter);
 
 //select
-//pool.query('select * from usuarios').then(function (resultados) {
-// console.log(resultados);
-//});
+pool.query('select * from usuarios').then(function(resultados) {
+ //console.log(resultados);
+});
 
 //insert
 //var obj = {
-//  nombre:'Flavia',
-//  apellidos: 'Lopez Tralala',
-//  programa: 'UNTBA-2022',
-//  mail: 'flavia.lopez@gmail.com'
+//  nombre:'Diana',
+//  apellidos: 'Liz',
+//  mail: 'diana.lizv@gmail.com',
+//  celular: '+56995394227',
+//  organizacion: 'Principal',
+//  password:123456789
 //}
 
-//pool.query('insert into hyperscanning_prueba set ?', [obj]).then(function (resultados) {
+//pool.query('insert into usuarios set ?', [obj]).then(function (resultados) {
 //  console.log(resultados);
 //});
 
 //update
-//var id = 1;
+//var id = 4;
 // var obj ={
-  // nombre: 'Ximena';
-  // apellidos: 'Gomez'
-  //  }
+// mail: 'dvargas@momentumconsultores.cl',
+// organizacion: 'Externa'
+//  }
 
-// pool.query('update hyperscanning_prueba set ? where id=?' , [obj, id]).then(function(resultados) {
+// pool.query('update usuarios set ? where id=?' , [obj, id]).then(function(resultados) {
 //  console.log(resultados);
 //});
 
 //borrar
 // var id = 1;
-//pool.query('delete from hyperscanning_prueba where id=?' , [id]).then(function(resultados) {
+//pool.query('delete from usuarios where id=?', [id]).then(function(resultados) {
 //  console.log(resultados);
 //});
 
