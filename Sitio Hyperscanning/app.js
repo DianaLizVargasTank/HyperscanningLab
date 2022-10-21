@@ -13,6 +13,10 @@ var loginsucessRouter = require('./routes/login_sucess');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/novedades');
+var adminNovedadesRouter = require('./routes/admin/novedades');
+var hyperscanningRouter = require('./routes/hyperscanning/session_hyperscan');
+var metodologiaRouter = require('./routes/metodologia');
+var testsRouter = require('./routes/tests');
 
 var app = express();
 
@@ -52,6 +56,11 @@ app.use('/users', usersRouter);
 app.use('/login_sucess', loginsucessRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/novedades', secured, adminRouter);
+app.use('/admin/novedades', secured, adminNovedadesRouter);
+app.use('/hyperscanning/session_hyperscan', hyperscanningRouter);
+app.use('/metodologia', metodologiaRouter);
+app.use('/tests', testsRouter);
+
 
 //select
 pool.query('select * from usuarios').then(function(resultados) {

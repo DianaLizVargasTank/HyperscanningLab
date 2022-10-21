@@ -1,0 +1,608 @@
+<div class="container-fluid">
+    <div style="padding:80px 0px 0px 0px;" class="row">
+        <div class="col-10"></div>
+        <div class="col-2 text-right">
+            <a href="admin/login/logout"><button type="button" class="btn btn-primary btn-lg px-4 gap-3">Cerrar
+                    sesión</button><i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid">
+    <div class"row">
+        <div style="margin:60px;" class="col-4"> <img style="height:90px;" src="/images/activity.png"
+                alt="Hyperscanning"></div>
+        <div style="margin:60px;" class="col-6">
+            <h1 class="display-4 fw-bold lh-1 mb-3">Hyperscanning Lab</h1>
+        </div>
+    </div>
+    <div style="margin:60px;" class="row">
+        <p class="col-lg-10 fs-4">Ahora iniciarás una nueva sesión de entrenamiento, recuerda llenar los campos
+            obligatorios, al finalizar haz click en enviar datos para luego visualizar el informe de la sesión en una
+            nueva pestaña.</p>
+    </div>
+</div>
+
+
+<!-- inicio layout con definiciones de metodologías-->
+<div style="margin:60px;" class="container-fluid">
+    <form action="/hyperscanning/session_hyperscan" method="post">
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/settings.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Datos de la sesión</h3>
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <label for="observador" class="form-label"><b>Observador</b></label>
+                <input type="text" id="observador" name="observador" class="form-control" aria-label="observador">
+            </div>
+        </div>
+
+        <div style="padding-top:12px;" class="row">
+            <div class=" col-5">
+                <p><b>N° de sesión</b></p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion1" value="1° sesión">
+                    <label class="form-check-label" for="n_sesion1">1° sesión</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion2" value="2° sesión">
+                    <label class="form-check-label" for="n_sesion2">2° sesión</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion3" value="3° sesión">
+                    <label class="form-check-label" for="n_sesion3">3° sesión</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion4" value="4° sesión">
+                    <label class="form-check-label" for="n_sesion4">4° sesión</label>
+                </div>
+            </div>
+            <div style="padding-top:10px;" class="col-lg-7">
+                <label for="fecha_sesion" class="form-label"><b>Fecha Sesión </b></label>
+                <input type="date" id="fecha_sesion" name="fecha_sesion" class="col-sm-2 col-form-label">
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-10">
+                <div class="form-check form-check-inline">
+                    <p><b>Tipo de Sesión*</b><br>
+                        <input class="form-check-input" type="radio" name="tipo_sesion" id="tipo_sesion"
+                            value="ambos headset">
+                        <label class="form-check-label" for="tipo_sesion">Ambos headset</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo_sesion" id="tipo_sesion"
+                        value="solo 1 rol con headset">
+                    <label class="form-check-label" for="tipo_sesion">solo un rol con headset</label>
+                </div>
+            </div>
+        </div>
+        <div style="padding-top:14px;" class="row">
+            <div class="col-10">
+                <label for="grabacion" class="form-label"><b>Link Video sesión - URL</b></label>
+                <input type="text" id="grabacion" name="grabacion" class="form-control" aria-label="URL Grabacion"
+                    placeholder="http://youtube.com/">
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="col-10 pb-4 text-blue border-bottom border-blue-2">
+        </div>
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/user.png" alt="Hyperscanning"> </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Datos del Participante</h3>
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-5">
+                <label for="nombre" class="form-label"><b>Nombres</b></label>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"
+                    aria-label="nombre">
+            </div>
+            <div class="col-5">
+                <label for="apellidos" class="form-label"><b>Apellidos</b></label>
+                <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos"
+                    aria-label="apellido">
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-10">
+                <label for="programa" class="form-label"><b>Programa</b></label>
+                <select class="form-select" id="programa" name="programa" aria-label="Default select example">
+                    <option selected>Selecciona el programa del participante</option>
+                    <option value="UCEMA">UCEMA</option>
+                    <option value="AZA">AZA</option>
+                    <option value="Metro">Metro</option>
+                    <option value="Individual">Individual</option>
+                </select>
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-10">
+                <label for="email" class="form-label"><b>Email participante</b></label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="col-10 pb-4 text-blue border-bottom border-blue-2">
+        </div>
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/activity.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Registro de Sesión</h3>
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <p><b>Nivel de Arousal en línea base - 3 minutos*</b><br>
+                    <span style="font-weight: 200" ;>Registrar el nivel de Arousal en el período de línea base</span>
+                </p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="arousal" value="1/5 Bajo Theta - (4-8 Hz)"
+                        id="arousal1">
+                    <label class="form-check-label" for="arousal1">
+                        1/5 Bajo Theta - (4-8 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="arousal" value="2/5 Medio Alpha - (8-12 Hz)"
+                        id="arousal2">
+                    <label class="form-check-label" for="arousal2">
+                        2/5 Medio Alpha - (8-12 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="arousal"
+                        value="3/5 Medio Alto - Low Beta (12-16 Hz)" id="arousal3">
+                    <label class="form-check-label" for="arousal3">
+                        3/5 Medio Alto - Low Beta (12-16 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="arousal" value="4/5 Alto - High Beta (16-25 Hz)"
+                        id="arousal4">
+                    <label class="form-check-label" for="arousal4">
+                        4/5 Alto - High Beta (16-25 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="arousal" value="5/5 Muy Alto - Gamma (25-45 Hz)"
+                        id="arousal5">
+                    <label class="form-check-label" for="arousal5">
+                        5/5 Muy Alto - Gamma (25-45 Hz)
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <label for="comentario" class="form-label"><b>Etapa de registro línea base o referencia</b></label>
+                <p><span style="font-weight: 200" ;>Registrar información relevante de línea base durante 3 minutos,
+                        participante sin hablar. Luego completar el patrón evidenciado</span>
+                </p>
+                <textarea class="form-control" rows="5" id="comentario" name="comentario"
+                    aria-label="comentario"></textarea>
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="col-10 pb-4 text-blue border-bottom border-blue-2">
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/activity.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Etapa de Observación - Parte 1</h3>
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <p><b>Evento / Patrón 1:*</b><br>
+            <div style="padding-top:5px;" class="row">
+                <div class="col-5">
+                    <label for="accion1" class="form-label"><b>Acción 1</b></label>
+                    <select class="form-select" id="accion1" name="accion1" aria-label="Default select example">
+                        <option selected>Selecciona la acción</option>
+                        <option value="Habla">Hablar</option>
+                        <option value="Escucha">Escuchar</option>
+                        <option value="Conversación dificil">Conv. difíciles</option>
+                        <option value="Lectura">Lectura</option>
+                        <option value="Límites">Poner Límites</option>
+                        <option value="Definir plan de acción">Definir plan de acción</option>
+                    </select>
+                </div>
+                <div class="col-5">
+                    <label for="indic1" class="form-label"><b>Indicadores Neuro 1</b></label>
+                    <select class="form-select" id="indic1" name="indic1" aria-label="Default select example">
+                        <option selected>Selecciona indic neuro</option>
+                        <option value="Habla">Compromiso</option>
+                        <option value="Escucha">Desinterés</option>
+                        <option value="Conversación dificil">Excitación</option>
+                        <option value="Lectura">Foco</option>
+                        <option value="Límites">Frustración</option>
+                        <option value="Definir plan de acción">Introspección</option>
+                        <option value="Definir plan de acción">Relajación</option>
+                    </select>
+                </div>
+            </div>
+            <div style="padding-top:12px;" class="row">
+                <div class="col-10">
+                    <label for="comentario1" class="form-label"><b>Comentario 1</b></label>
+                    <textarea class="form-control" rows="5" id="comentario1" name="comentario1"
+                        aria-label="comentario1"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div style="padding-top:12px;" class="row">
+            <p><b>Evento / Patrón 2:*</b><br>
+            <div style="padding-top:5px;" class="row">
+                <div class="col-5">
+                    <label for="accion2" class="form-label"><b>Acción 2</b></label>
+                    <select class="form-select" id="accion2" name="accion2" aria-label="Default select example">
+                        <option selected>Selecciona la acción</option>
+                        <option value="Habla">Hablar</option>
+                        <option value="Escucha">Escuchar</option>
+                        <option value="Conversación dificil">Conv. difíciles</option>
+                        <option value="Lectura">Lectura</option>
+                        <option value="Límites">Poner Límites</option>
+                        <option value="Definir plan de acción">Definir plan de acción</option>
+                    </select>
+                </div>
+                <div class="col-5">
+                    <label for="indic2" class="form-label"><b>Indicadores Neuro 2</b></label>
+                    <select class="form-select" id="indic2" name="indic2" aria-label="Default select example">
+                        <option selected>Selecciona indic neuro</option>
+                        <option value="Habla">Compromiso</option>
+                        <option value="Escucha">Desinterés</option>
+                        <option value="Conversación dificil">Excitación</option>
+                        <option value="Lectura">Foco</option>
+                        <option value="Límites">Frustración</option>
+                        <option value="Definir plan de acción">Introspección</option>
+                        <option value="Definir plan de acción">Relajación</option>
+                    </select>
+                </div>
+            </div>
+            <div style="padding-top:12px;" class="row">
+                <div class="col-10">
+                    <label for="comentario2" class="form-label"><b>Comentario 2</b></label>
+                    <textarea class="form-control" rows="5" id="comentario2" name="comentario2"
+                        aria-label="comentario2"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div style="padding-top:15px;" class="col-10 pb-4 text-blue border-bottom border-blue-2">
+        </div>
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/activity.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Etapa de Reflexión intermedia</h3>
+            </div>
+        </div>
+        <div style="padding-top:15px;" class="row">
+
+            <div class="col-10">
+                <p><b>Nivel de Arousal en reflexión - 3 minutos*</b><br>
+                    <span style="font-weight: 200" ;>En intermedio de la sesión debes registrar
+                        información relevante durante 3 minutos, participante debe reflexionar lo
+                        realizado sin hablar. Luego se debe completar la evidencia.
+                </p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reflexion" value="1/5 Bajo Theta - (4-8 Hz)"
+                        id="reflexion1">
+                    <label class="form-check-label" for="reflexion1">
+                        1/5 Bajo Theta - (4-8 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reflexion" value="2/5 Medio Alpha - (8-12 Hz)"
+                        id="relfexion2">
+                    <label class="form-check-label" for="reflexion2">
+                        2/5 Medio Alpha - (8-12 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reflexion"
+                        value="3/5 Medio Alto - Low Beta (12-16 Hz)" id="reflexion3">
+                    <label class="form-check-label" for="reflexion3">
+                        3/5 Medio Alto - Low Beta (12-16 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reflexion"
+                        value="4/5 Alto - High Beta (16-25 Hz)" id="refelxion4">
+                    <label class="form-check-label" for="reflexion4">
+                        4/5 Alto - High Beta (16-25 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reflexion"
+                        value="5/5 Muy Alto - Gamma (25-45 Hz)" id="reflexion5">
+                    <label class="form-check-label" for="reflexion5">
+                        5/5 Muy Alto - Gamma (25-45 Hz)
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <label for="comentarioref" class="form-label"><b>Comentarios intermedio
+                        reflexión</b></label>
+
+                <textarea class="form-control" rows="5" id="comentarioref" name="comentarioref"
+                    aria-label="comentarioref"></textarea>
+            </div>
+        </div>
+        <div style="padding-top:15px;" class="col-10 pb-4 text-blue border-bottom border-blue-2">
+        </div>
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/activity.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Etapa de Observación - Parte 2</h3>
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <p><b>Evento / Patrón 3:*</b><br>
+            <div style="padding-top:5px;" class="row">
+                <div class="col-5">
+                    <label for="accion3" class="form-label"><b>Acción 3</b></label>
+                    <select class="form-select" id="accion3" name="accion3" aria-label="Default select example">
+                        <option selected>Selecciona la acción</option>
+                        <option value="Habla">Hablar</option>
+                        <option value="Escucha">Escuchar</option>
+                        <option value="Conversación dificil">Conv. difíciles</option>
+                        <option value="Lectura">Lectura</option>
+                        <option value="Límites">Poner Límites</option>
+                        <option value="Definir plan de acción">Definir plan de acción</option>
+                    </select>
+                </div>
+                <div class="col-5">
+                    <label for="indic3" class="form-label"><b>Indicadores Neuro 3</b></label>
+                    <select class="form-select" id="indic3" name="indic3" aria-label="Default select example">
+                        <option selected>Selecciona indic neuro</option>
+                        <option value="Habla">Compromiso</option>
+                        <option value="Escucha">Desinterés</option>
+                        <option value="Conversación dificil">Excitación</option>
+                        <option value="Lectura">Foco</option>
+                        <option value="Límites">Frustración</option>
+                        <option value="Definir plan de acción">Introspección</option>
+                        <option value="Definir plan de acción">Relajación</option>
+                    </select>
+                </div>
+            </div>
+            <div style="padding-top:12px;" class="row">
+                <div class="col-10">
+                    <label for="comentario3" class="form-label"><b>Comentario 3</b></label>
+                    <textarea class="form-control" rows="5" id="comentario3" name="comentario3"
+                        aria-label="comentario3"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <p><b>Evento / Patrón 4*</b><br>
+            <div style="padding-top:5px;" class="row">
+                <div class="col-5">
+                    <label for="accion4" class="form-label"><b>Acción 4</b></label>
+                    <select class="form-select" id="accion4" name="accion4" aria-label="Default select example">
+                        <option selected>Selecciona la acción</option>
+                        <option value="Habla">Hablar</option>
+                        <option value="Escucha">Escuchar</option>
+                        <option value="Conversación dificil">Conv. difíciles</option>
+                        <option value="Lectura">Lectura</option>
+                        <option value="Límites">Poner Límites</option>
+                        <option value="Definir plan de acción">Definir plan de acción</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="indic4" class="form-label"><b>Indicadores Neuro 4</b></label>
+                    <select class="form-select" id="indic4" name="indic4" aria-label="Default select example">
+                        <option selected>Selecciona indic neuro</option>
+                        <option value="Habla">Compromiso</option>
+                        <option value="Escucha">Desinterés</option>
+                        <option value="Conversación dificil">Excitación</option>
+                        <option value="Lectura">Foco</option>
+                        <option value="Límites">Frustración</option>
+                        <option value="Definir plan de acción">Introspección</option>
+                        <option value="Definir plan de acción">Relajación</option>
+                    </select>
+                </div>
+            </div>
+            <div style="padding-top:12px;" class="row">
+                <div class="col-10">
+                    <label for="comentario4" class="form-label"><b>Comentario 4</b></label>
+                    <textarea class="form-control" rows="5" id="comentario4" name="comentario4"
+                        aria-label="comentario4"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div style="padding-top:15px; border-bottom: 3px;" class="col-10 pb-4 text-blue border-bottom border-blue-3">
+        </div>
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/activity.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Etapa de Recuperación Final</h3>
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <p><b>Nivel de Arousal en recuperación - 5 minutos*</b><br>
+                    <span style="font-weight: 200" ;>Al finalizar la sesión se debe registrar la
+                        información relevante durante 3 minutos. El participante deje relajarse sin
+                        habla, luego debe completar el patrón evidenciado.
+                </p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="recuperacion" value="1/5 Bajo Theta - (4-8 Hz)"
+                        id="recuperacion1">
+                    <label class="form-check-label" for="recuperacion1">
+                        1/5 Bajo Theta - (4-8 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="recuperacion" value="2/5 Medio Alpha - (8-12 Hz)"
+                        id="recuperacion2">
+                    <label class="form-check-label" for="recuperacion2">
+                        2/5 Medio Alpha - (8-12 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="recuperacion"
+                        value="3/5 Medio Alto - Low Beta (12-16 Hz)" id="recuperacion3">
+                    <label class="form-check-label" for="recuperacion3">
+                        3/5 Medio Alto - Low Beta (12-16 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="recuperacion"
+                        value="4/5 Alto - High Beta (16-25 Hz)" id="recuperacion4">
+                    <label class="form-check-label" for="recuperacion4">
+                        4/5 Alto - High Beta (16-25 Hz)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="recuperacion"
+                        value="5/5 Muy Alto - Gamma (25-45 Hz)" id="recuperacion5">
+                    <label class="form-check-label" for="recuperacion5">
+                        5/5 Muy Alto - Gamma (25-45 Hz)
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <label for="comentariorecup" class="form-label"><b>Comentarios recuperación
+                        final</b></label>
+
+                <textarea class="form-control" rows="5" id="comentariorecup" name="comentariorecup"
+                    aria-label="comentariorecup"></textarea>
+            </div>
+        </div>
+        <br>
+        <div style="padding-top:15px;" class="col-10 pb-4 text-blue border-bottom border-blue-2">
+        </div>
+        <div style="padding-top:15px;" class="row">
+            <h3> Modelo de Evaluación</h3>
+            <br>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-10">
+                <label for="modelo" class="form-label"><b>Elige un Modelo de evaluación para esta
+                        sesión</b></label>
+                <select class="form-select" id="modelo" name="modelo" aria-label="Default select example">
+                    <option selected>Selecciona el modelo a utilizar en sesión</option>
+                    <option value="Liderazgo">Modelo de Liderazgo</option>
+                    <option value="Conflicto">Modelo de Conflicto</option>
+                    <option value="Feedback">Modelo Feedback</option>
+                    <option value="Individual">Individual</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="col-10">
+<button type="submit" class="btn btn-outline-primary"><img style="height:20px;" src="/images/save.png" alt="submit"> Guardar resultados</button>
+        </div>
+    </form>
+</div>
+
+<!-- inicio layout con definiciones de metodologías-->
+
+<div id="metodos" class="container text-center">
+    <div class="row pb-5">
+        <div class="col-2">
+            <div class="card" style="width: 18rem;">
+                <img src="/images/Biofeedback1.JPG" class="card-img-top" alt="hyperscanning">
+                <div class="card-body">
+                    <p class="card-text">
+                    <h4>HyperScanning</h4><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
+                    veritatis dolorum saepe corporis, provident earum mollitia nobis, optio architecto ex quae. Esse
+                    nobis temporibus cupiditate, vero est enim aperiam adipisci!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="col-2">
+            <div class="card" style="width: 18rem;">
+                <img src="/images/error- not found.png" class="card-img-top" alt="neurofeedback">
+                <div class="card-body">
+                    <p class="card-text">
+                    <h4>NeuroFeedback</h4><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+                    veritatis rerum deleniti, vel corrupti ullam sunt doloribus placeat dolorem vitae facilis
+                    necessitatibus blanditiis. Id laborum quod fugiat modi maxime praesentium..</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="col-2">
+            <div class="card" style="width: 18rem;">
+                <img src="/images/error- not found.png" class="card-img-top" alt="biofeedback">
+                <div class="card-body">
+                    <p class="card-text">
+                    <h4>Biofeedback</h4><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
+                    nesciunt. Nostrum aperiam vero voluptatem quidem ducimus, rerum facilis magnam sed? Tempora
+                    harum mollitia ullam ipsa earum et, corrupti obcaecati neque?</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+</div>
+
+<!-- fin layout con definiciones de metodologías-->
+<br>
+<!--visitanos-->
+<div id="conocenos" style="background-color: #dadada;" class="row py-5 px-5">
+    <div class="col-sm-6 col-md-5 col-lg-6">
+        <h2>Visítanos</h2>
+        <div class="mapa">
+
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.7910590678525!2d-70.53697898523814!3d-33.40261490244394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cea3ad97de8f%3A0x9556d849acdd0537!2sCam.%20El%20Alba%209500%2C%20Las%20Condes%2C%207550000%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1658839456457!5m2!1ses-419!2scl"
+                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0 py-4">
+
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="inputName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Nombre">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            </div>
+            <div class="col-12">
+                <label for="inputAsunto" class="form-label">Asunto</label>
+                <input type="text" class="form-control" id="inputAsunto" placeholder="Asunto">
+            </div>
+            <div class="col-12">
+                <label for="inputMessage" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="inputMessage" rows="3" placeholder="Mensaje"></textarea>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- fin banda qué hacer--->
+
+
+<br>

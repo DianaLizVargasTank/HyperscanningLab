@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
-
+var usuariosModel = require('./../models/usuariosModel');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -23,17 +23,18 @@ router.post('/', async (req, res, next) => {
 
       console.log(req.body);
 
-      var data = await usuariosmodel.getUserByUsernameAndPassword(usuario, password);
+      var data = await usuariosModel.getUserAndPassword(usuario, password);
 
       if (data != undefined) {
           req.session.id_usuario = data.id; 
           req.session.nombre = data.usuario;
+          
           res.redirect('/login_sucess');
       } else {
           res.render('admin/login', {
               layout: 'admin/layout',
               error: true
-          });
+          })
       } //END IF ELSE
   } catch (error) {
       console.log(error)
