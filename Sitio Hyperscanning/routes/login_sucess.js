@@ -1,9 +1,23 @@
 var express = require('express');
 var router = express.Router();
+var agendaModel = require('./../models/agendaModel');
 
 
-router.get('/', function (req, res, next) {
-    res.render('login_sucess');
+router.get('/', async function (req, res, next) {
+
+var agenda = await agendaModel. getAgenda();
+
+    res.render('login_sucess',{
+        usuario:req.session.nombre,
+        agenda
+    });
+});
+router.get('/eliminar/:id', async (req, res, next) => {
+var id = req.params.id;
+await agendaModel.deleteAgendaById(Id);
+res.redirect('//admin/novedades')
+
+
 });
 
 //endsession
