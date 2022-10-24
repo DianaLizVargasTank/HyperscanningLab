@@ -7,9 +7,10 @@ var logger = require('morgan');
 require('dotenv').config();
 var session = require('express-session');
 var pool = require('./models/bd');
+var fileUpload = require('express-fileupload');
 
 var indexRouter = require('./routes/index');
-var loginsucessRouter = require('./routes/login_sucess');
+var nosotrosRouter = require('./routes/nosotros');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/novedades');
@@ -51,15 +52,19 @@ secured = async (req, res, next) => {
   }
 }
 
+app.use(fileUpload({
+  useTempFiles:true,
+  tempFileDir: '/tmp/'
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/login_sucess', loginsucessRouter);
+app.use('/nosotros', nosotrosRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/novedades', secured, adminRouter);
 app.use('/admin/novedades', secured, adminNovedadesRouter);
-app.use('/hyperscanning/hyperscanlab', hyperscanlabRouter);
-app.use('/hyperscanning/session_hyperscan', hyperscanningRouter);
+app.use('/hyperscanning/hyperscanlab', secured, hyperscanlabRouter);
+app.use('/hyperscanning/session_hyperscan', secured, hyperscanningRouter);
 app.use('/metodologia', metodologiaRouter);
 app.use('/tests', testsRouter);
 

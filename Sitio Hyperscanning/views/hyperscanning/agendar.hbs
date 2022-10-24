@@ -12,7 +12,7 @@
     </div>
 </div>
 <div style="margin:60px;" class="container-fluid">
-    <form action="/hyperscanning/hyperscanlab/agendar" method="post">
+    <form action="/hyperscanning/hyperscanlab/agendar" method="post" enctype="multipart/form-data">
         <div style="padding-top:20px;" class="row">
             <div class="col-auto me-auto"> <img style="height:30px;" src="/images/settings.png" alt="Hyperscanning">
             </div>
@@ -69,6 +69,15 @@
                     <option value="Metro">Metro</option>
                     <option value="Individual">Individual</option>
                 </select>
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-5">
+                <label>Test 1: <input type="file" class="form-control" name="test_id1" id="test_id1" /></label>
+            </div>
+
+            <div class="col-5">
+                <label>Test 2: <input type="file" class="form-control" name="test_id2" id="test_id2" /></label>
             </div>
         </div>
         <br>
