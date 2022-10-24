@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var agendaModel = require('../../models/agendaModel');
+var util = require('util');
+var cloudinary = require('cloudinary').v2;
+const uploader = util.promisify(cloudinary.uploader.upload);
+
+
 
 router.get('/', async function (req, res, next) {
     var agenda = await agendaModel.getAgenda();
@@ -29,9 +34,23 @@ router.get('/agendar', (req, res, next) => {
 
 router.post('/agendar', async (req, res, next) => {
     try {
-        console.log(req.body)
+        //console.log(req.body)
+        var test_id1 = '';
+        var test_id2 = '';
+        if (req.files && Object.keys(req.files).length > 0) {
+            test_id1 = req.files.test_id1,
+            test_id2 = req.files.test_id2,
+            test_id1 = (await uploader(test_id1.tempFilePath)).public_id,
+            test_id2 = (await uploader(test_id2.tempFilePath)).public_id,
+        };
+
+
         if (req.body.usuario != "" && req.body.fecha_sesion != "" && req.body.n_sesion != "" && req.body.coachee != "" && req.body.programa != "") {
-            await agendaModel.insertAgenda(req.body);
+            await agendaModel.insertAgenda({
+...req.body,
+test_id1,
+test_id2
+            });
             res.redirect('/hyperscanning/hyperscanlab')
         } else {
             res.render('hyperscanning/agendar', {
@@ -62,7 +81,7 @@ router.get('/modificar/:Id', async (req, res, next) => {
     });
 });
 
-router.post('/modificar', async(req,res,next) => {
+router.post('/modificar', async (req, res, next) => {
     try {
         console.log(req.body.Id);
         var obj = {
@@ -80,7 +99,7 @@ router.post('/modificar', async(req,res,next) => {
         console.log(error)
         res.render('hyperscanning/modificar', {
             layout: 'admin/layout',
-            error:true,
+            error: true,
             message: ' No se modificó la novedad'
         })
     }
