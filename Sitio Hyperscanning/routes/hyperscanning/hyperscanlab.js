@@ -14,7 +14,7 @@ router.get('/', async function (req, res, next) {
 
 /*para eliminar items de agenda*/
 router.get('/eliminar/:Id', async (req, res, next) => {
-    var id = req.params.Id;
+    var Id = req.params.Id;
     await agendaModel.deleteAgendaById(Id);
     res.redirect('/hyperscanning/hyperscanlab')
 });
@@ -53,8 +53,8 @@ router.post('/agendar', async (req, res, next) => {
 //end agendar
 
 /*modificar agenda*/
-router.get('/modificar/:id', async (req, res, next) => {
-    var id = req.params.id;
+router.get('/modificar/:Id', async (req, res, next) => {
+    var Id = req.params.Id;
     var agenda = await agendaModel.getAgendaById(Id);
     res.render('hyperscanning/modificar', {
         layout: 'admin/layout',
@@ -62,15 +62,17 @@ router.get('/modificar/:id', async (req, res, next) => {
     });
 });
 
-router.post('/modificar',async(req,res,next) => {
+router.post('/modificar', async(req,res,next) => {
     try {
-        let obj ={
-            usuario:req.body.usuario,
+        console.log(req.body.Id);
+        var obj = {
+            usuario: req.body.usuario,
             fecha_sesion: req.body.fecha_sesion,
             n_sesion: req.body.n_sesion,
             coachee: req.body.coachee,
             programa: req.body.programa
         }
+        console.log(obj);
         await agendaModel.modificarAgendaById(obj, req.body.Id);
         res.redirect('/hyperscanning/hyperscanlab');
     }
@@ -82,7 +84,7 @@ router.post('/modificar',async(req,res,next) => {
             message: ' No se modificó la novedad'
         })
     }
-})
+});
 
 //endsession
 router.get('/logout', function (req, res, next) {

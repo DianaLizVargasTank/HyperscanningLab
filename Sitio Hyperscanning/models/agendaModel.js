@@ -27,16 +27,16 @@ async function insertAgenda(obj) {
 
 /*modificar un agendamiento*/
 async function getAgendaById(Id) {
-    var query = "select * from prox_sesiones where id = ?" ;
-    var rows = await pool.query(query, [id]);
+    var query = "select * from prox_sesiones where Id = ?" ;
+    var rows = await pool.query(query, [Id]);
     return rows[0];
 }
 
 async function modificarAgendaById(obj, Id) {
     try {
-        var query = "update prox_sesiones  set ? where id = ?";
-        var rows = await pool.query(query, [obj,Id]);
-        return rows
+        var query = "update prox_sesiones set ? where Id= ?";
+        var rows = await pool.query(query, [obj, Id]);
+        return rows;
     } catch (error) {
         throw error;
     }
