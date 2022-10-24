@@ -5,10 +5,10 @@ var pool = require('../../models/bd');
 var md5 = require('md5');
 var sessionhyperscanModel = require('../../models/session_hyperscanModel');
 
-
-/* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('hyperscanning/session_hyperscan');
+  res.render('hyperscanning/session_hyperscan',{
+    layout:'admin/layout'
+  });
 });
 
 /*Agregar datos sesion*/
@@ -32,7 +32,7 @@ router.post('/session_hyperscan', async (req, res, next) => {
     console.log(error)
     res.render('hyperscanning/session_hyperscan', {
       error: true,
-      message: 'No se cargó la novedad'
+      message: 'No se cargó'
     })
   }
 })

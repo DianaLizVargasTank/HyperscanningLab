@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <div style="padding:80px 0px 0px 0px;" class="row">
+        <div class="col-10"></div>
+        <div class="col-2 text-right">
+            <p class="text-end">
+                <a href="admin/login/logout"><button type="button" class="btn btn-primary btn-lg px-4 gap-3">Cerrar
+                        sesión <i class="fas fa-sign-out-alt"></i></button>
+                </a>
+            </p>
+        </div>
+
+    </div>
+</div>
+<div style="margin:60px;" class="container-fluid">
+    <form action="/hyperscanning/hyperscanlab/agendar" method="post">
+        <div style="padding-top:20px;" class="row">
+            <div class="col-auto me-auto"> <img style="height:30px;" src="/images/settings.png" alt="Hyperscanning">
+            </div>
+            <div style="text-align:left; margin-left:0px;" class="col">
+                <h3>Datos de la sesión</h3>
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div class="col-10">
+                <label for="usuario" class="form-label"><b> Nombre Observador</b></label>
+                <input type="text" id="usuario" name="usuario" class="form-control" aria-label="usuario">
+            </div>
+        </div>
+        <div style="padding-top:12px;" class="row">
+            <div style="padding-top:10px;" class="col-6">
+                <label for="fecha_sesion" class="form-label"><b>Fecha Sesión </b></label>
+                <input type="date" id="fecha_sesion" name="fecha_sesion" class="col-sm-2 col-form-label">
+            </div>
+            <div class="col">
+                <p><b>N° de sesión</b></p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion1" value="1° sesión">
+                    <label class="form-check-label" for="n_sesion1">1° sesión</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion2" value="2° sesión">
+                    <label class="form-check-label" for="n_sesion2">2° sesión</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion3" value="3° sesión">
+                    <label class="form-check-label" for="n_sesion3">3° sesión</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="n_sesion" id="n_sesion4" value="4° sesión">
+                    <label class="form-check-label" for="n_sesion4">4° sesión</label>
+                </div>
+            </div>
+
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-10">
+                <label for="coachee" class="form-label"><b>Nombres</b></label>
+                <input type="text" id="coachee" name="coachee" class="form-control" placeholder="Nombre Coachee"
+                    aria-label="nombre">
+            </div>
+        </div>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-10">
+                <label for="programa" class="form-label"><b>Programa</b></label>
+                <select class="form-select" id="programa" name="programa" aria-label="Default select example">
+                    <option selected>Selecciona el programa del participante</option>
+                    <option value="UCEMA">UCEMA</option>
+                    <option value="AZA">AZA</option>
+                    <option value="Metro">Metro</option>
+                    <option value="Individual">Individual</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div style="padding-top:10px;" class="col-12">
+            <button type="submit" class="btn btn-primary">Agendar</button>
+        </div>
+    </form>
+    {{#if error}}
+    <h5>{{message}}</h5>
+    {{/if}}
+</div>

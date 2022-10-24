@@ -2,20 +2,18 @@ var express = require('express');
 var router = express.Router();
 var agendaModel = require('./../../models/agendaModel');
 
-
 router.get('/', async function (req, res, next) {
-
-var agenda = await agendaModel. getAgenda();
-
-    res.render('login_sucess',{
-        usuario:req.session.nombre,
-        agenda
+    var agenda = await agendaModel.getAgenda();
+    res.render('admin/novedades', {
+        usuario: req.session.nombre,
+        agenda,
+        layout: 'admin/layout'
     });
 });
 router.get('/eliminar/:id', async (req, res, next) => {
-var id = req.params.id;
-await agendaModel.deleteAgendaById(Id);
-res.redirect('//admin/novedades')
+    var id = req.params.id;
+    await agendaModel.deleteAgendaById(Id);
+    res.redirect('/admin/novedades')
 
 
 });
@@ -60,7 +58,7 @@ router.post('/session_hyperscan', async (req, res, next) => {
 router.get('/modificar/:observador', async (req, res, next) => {
     var observador = req.params.observador;
     var session = await session_hyperscan.getSessionByObservador(observador);
-    res,render('/hyperscanning/modificar', {
+    res, render('/hyperscanning/modificar', {
         layout: 'admin/layout',
         session
     });
