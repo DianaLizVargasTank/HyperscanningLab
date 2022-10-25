@@ -60,10 +60,20 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-10"></div>
+    <div class="col-6"></div>
+    <div class="col-4 text-right" style="margin-top:5px;">
+
+        <form class="form-inline" action="/hyperscanning/hyperscanninglab" method="get">
+            <div class="input-group"><input class="form-control" type="search" placeholder="Buscar" aria-label="Search"
+                    name="x" {{#if x}} value="x" {{/if}}"><button class="btn btn-primary outline my-2 my-sm-0"
+                    type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button></div>
+        </form>
+    </div>
+
     <div class="col-2 text-right" style="margin-top:5px;">
-        <a href="/hyperscanning/hyperscanlab/agendar"><button type="button"
-                class="btn btn-primary btn-sm px-2 gap-3">Agendar
+        <a href="/hyperscanning/hyperscanlab/agendar"><button type="button" class="btn btn-primary my-2 my-sm-0">Agendar
                 sesión
                 <i class="fas fa-plus"></i></button>
         </a>
@@ -126,7 +136,13 @@
                 </tr>
                 {{/each}}
             </tbody>
+
         </table>
+        {{#if is_search}}
+        {{#unless agenda.length}}
+        No se encontraron resultados para "<b>{{x}}</b>"
+        {{/unless}}
+        {{/if}}
 
     </div>
 </div>

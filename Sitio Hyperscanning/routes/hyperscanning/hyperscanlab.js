@@ -10,7 +10,16 @@ const destroy = util.promisify(cloudinary.uploader.destroy);
 
 /*listar agenda en hyperscanning*/
 router.get('/', async function (req, res, next) {
-    var agenda = await agendaModel.getAgenda();
+
+    //var agenda = await agendaModel.getAgenda();
+
+    var agenda;
+    if(req.query.x === undefined) {
+        agenda = await agendaModel.getAgenda();
+    } else {
+        agenda = await agendaModel.buscarAgenda(req.query.x);
+    }
+
     agenda = agenda.map(agenda => {
         if (agenda.test_id) {
             const test_id1 = cloudinary.test_id1(agenda.test_id, {
@@ -36,6 +45,8 @@ router.get('/', async function (req, res, next) {
         layout: 'admin/layout',
         usuario: req.session.nombre,
         agenda
+        is_search: req.query.x !== undefined,
+        x: req.query.x
 
     });
 });
