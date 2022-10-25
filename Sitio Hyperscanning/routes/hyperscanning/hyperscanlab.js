@@ -44,7 +44,7 @@ router.get('/', async function (req, res, next) {
     res.render('hyperscanning/hyperscanlab', {
         layout: 'admin/layout',
         usuario: req.session.nombre,
-        agenda
+        agenda,
         is_search: req.query.x !== undefined,
         x: req.query.x
 

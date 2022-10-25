@@ -46,7 +46,7 @@ async function modificarAgendaById(obj, Id) {
 /* search de agenda */
 async function buscarAgenda(busqueda) {
     var query = "select * from prox_sesiones where coachee like ? OR usuario like ? OR fecha_sesion like ?";
-    var rows = await pool.query(query, {'%' + busqueda + '%', '%' + busqueda + '%', '%' + busqueda + '%'});
+    var rows = await pool.query(query, ['%'+busqueda+'%','%'+busqueda+'%','%'+busqueda+'%']);
     return rows;
 }
 //fin search
