@@ -6,7 +6,7 @@ var cloudinary = require('cloudinary').v2;
 const uploader = util.promisify(cloudinary.uploader.upload);
 
 
-
+/*listar agenda en hyperscanning*/
 router.get('/', async function (req, res, next) {
     var agenda = await agendaModel.getAgenda();
     res.render('hyperscanning/hyperscanlab', {
@@ -39,17 +39,16 @@ router.post('/agendar', async (req, res, next) => {
         var test_id2 = '';
         if (req.files && Object.keys(req.files).length > 0) {
             test_id1 = req.files.test_id1,
-            test_id2 = req.files.test_id2,
-            test_id1 = (await uploader(test_id1.tempFilePath)).public_id,
-            test_id2 = (await uploader(test_id2.tempFilePath)).public_id,
-        };
-
+                test_id2 = req.files.test_id2,
+                test_id1 = (await uploader(test_id1.tempFilePath)).public_id;
+            test_id2 = (await uploader(test_id2.tempFilePath)).public_id;
+        }
 
         if (req.body.usuario != "" && req.body.fecha_sesion != "" && req.body.n_sesion != "" && req.body.coachee != "" && req.body.programa != "") {
             await agendaModel.insertAgenda({
-...req.body,
-test_id1,
-test_id2
+                ...req.body,
+                test_id1,
+                test_id2
             });
             res.redirect('/hyperscanning/hyperscanlab')
         } else {
@@ -64,7 +63,7 @@ test_id2
         res.render('hyperscanning/agendar', {
             layout: 'admin/layout',
             error: true,
-            message: ' No se agendó la sesión'
+            message: 'No se agendó la sesión'
         });
     }
 });
