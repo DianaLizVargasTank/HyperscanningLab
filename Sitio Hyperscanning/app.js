@@ -14,6 +14,7 @@ var nosotrosRouter = require('./routes/nosotros');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/novedades');
+var admintestsRouter = require ('./routes/admin/tests');
 var adminNovedadesRouter = require('./routes/admin/novedades');
 var hyperscanlabRouter = require('./routes/hyperscanning/hyperscanlab');
 var hyperscanningRouter = require('./routes/hyperscanning/session_hyperscan');
@@ -50,10 +51,10 @@ secured = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 app.use(fileUpload({
-  useTempFiles:true,
+  useTempFiles: true,
   tempFileDir: '/tmp/'
 }));
 
@@ -63,6 +64,7 @@ app.use('/nosotros', nosotrosRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/novedades', secured, adminRouter);
 app.use('/admin/novedades', secured, adminNovedadesRouter);
+app.use('/admin/tests', secured, admintestsRouter);
 app.use('/hyperscanning/hyperscanlab', secured, hyperscanlabRouter);
 app.use('/hyperscanning/session_hyperscan', secured, hyperscanningRouter);
 app.use('/metodologia', metodologiaRouter);

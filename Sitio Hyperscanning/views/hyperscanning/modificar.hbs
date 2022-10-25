@@ -12,7 +12,7 @@
     </div>
 </div>
 <div style="margin:60px;" class="container-fluid">
-    <form action="/hyperscanning/hyperscanlab/modificar" method="post">
+    <form action="/hyperscanning/hyperscanlab/modificar" method="post" enctype="multipart/form-data">
         <div style="padding-top:20px;" class="row">
             <div class="col-auto me-auto"> <img style="height:30px;" src="/images/settings.png" alt="Hyperscanning">
             </div>
@@ -23,13 +23,15 @@
         <div style="padding-top:12px;" class="row">
             <div class="col-10">
                 <label for="usuario" class="form-label"><b> Nombre Observador</b></label>
-                <input type="text" id="usuario" name="usuario" class="form-control" aria-label="usuario" value="{{agenda.usuario}}">
+                <input type="text" id="usuario" name="usuario" class="form-control" aria-label="usuario"
+                    value="{{agenda.usuario}}">
             </div>
         </div>
         <div style="padding-top:12px;" class="row">
             <div style="padding-top:10px;" class="col-6">
                 <label for="fecha_sesion" class="form-label"><b>Fecha Sesión </b></label>
-                <input type="date" id="fecha_sesion" name="fecha_sesion" class="col-sm-2 col-form-label" value="{{agenda.fecha_sesion}}">
+                <input type="date" id="fecha_sesion" name="fecha_sesion" class="col-sm-2 col-form-label"
+                    value="{{agenda.fecha_sesion}}">
             </div>
             <div class="col">
                 <p><b>N° de sesión</b></p>
@@ -62,7 +64,7 @@
         <div style="padding-top:10px;" class="row">
             <div class="col-10">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-                <select class="form-select" id="programa" name="programa" aria-label="Default select example">
+                <select class="form-select" id="programa" name="programa" aria-label="Default select example" value="{{programa}}">
                     <option selected>Selecciona el programa del participante</option>
                     <option value="UCEMA">UCEMA</option>
                     <option value="AZA">AZA</option>
@@ -70,6 +72,13 @@
                     <option value="Individual">Individual</option>
                 </select>
             </div>
+        </div>
+        <br>
+        <div style="padding-top:10px;" class="row">
+            <div class="col-5">
+                <label for="test_id1" class="form-label">Test 1: </label><input type="file" class="form-control" name="test_id1" id="test_id1"/>
+            <label><input type="cehckbox" name="test_delete" id="test_delete" value="1"> Eliminar archivo actual?</label>
+<input type="hidden" name="test_original" value="{{agenda.test_id1}}">           </div>
         </div>
         <br>
         <div style="padding-top:10px;" class="col-12">

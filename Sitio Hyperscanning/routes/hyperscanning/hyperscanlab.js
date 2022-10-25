@@ -3,12 +3,35 @@ var router = express.Router();
 var agendaModel = require('../../models/agendaModel');
 var util = require('util');
 var cloudinary = require('cloudinary').v2;
+
 const uploader = util.promisify(cloudinary.uploader.upload);
+const destroy = util.promisify(cloudinary.uploader.destroy);
 
 
 /*listar agenda en hyperscanning*/
 router.get('/', async function (req, res, next) {
     var agenda = await agendaModel.getAgenda();
+    agenda = agenda.map(agenda => {
+        if (agenda.test_id1) {
+            const test_id1 = cloudinary.test_id1(agenda.test_id1, {
+                width: 80,
+                height: 90,
+                crop: 'fill'
+            });
+            return {
+                ...agenda,
+                test_id1
+            }
+        } else {
+            return {
+                ...agenda,
+                test_id1: '/images/error- not found.png'
+            }
+        }
+    });
+
+
+
     res.render('hyperscanning/hyperscanlab', {
         layout: 'admin/layout',
         usuario: req.session.nombre,
@@ -20,8 +43,15 @@ router.get('/', async function (req, res, next) {
 /*para eliminar items de agenda*/
 router.get('/eliminar/:Id', async (req, res, next) => {
     var Id = req.params.Id;
-    await agendaModel.deleteAgendaById(Id);
-    res.redirect('/hyperscanning/hyperscanlab')
+
+    let agenda = await agendaModel.getAgendaById(Id);
+    if (agenda.test_id1) {
+        await (destroy(agenda.test_id1));
+    }
+
+
+await agendaModel.deleteAgendaById(Id);
+res.redirect('/hyperscanning/hyperscanlab')
 });
 //end eliminar
 
@@ -36,19 +66,16 @@ router.post('/agendar', async (req, res, next) => {
     try {
         //console.log(req.body)
         var test_id1 = '';
-        var test_id2 = '';
         if (req.files && Object.keys(req.files).length > 0) {
-            test_id1 = req.files.test_id1,
-                test_id2 = req.files.test_id2,
-                test_id1 = (await uploader(test_id1.tempFilePath)).public_id;
-            test_id2 = (await uploader(test_id2.tempFilePath)).public_id;
+            test_id1 = req.files.test_id1;
+            test_id1 = (await uploader(test_id1.tempFilePath)).public_id;
+
         }
 
         if (req.body.usuario != "" && req.body.fecha_sesion != "" && req.body.n_sesion != "" && req.body.coachee != "" && req.body.programa != "") {
             await agendaModel.insertAgenda({
                 ...req.body,
-                test_id1,
-                test_id2
+                test_id1
             });
             res.redirect('/hyperscanning/hyperscanlab')
         } else {
@@ -82,13 +109,31 @@ router.get('/modificar/:Id', async (req, res, next) => {
 
 router.post('/modificar', async (req, res, next) => {
     try {
+        let test_id1 = req.body.test_id1_original;
+        let borrar_test_id1_viejo = false;
+
+        if (req.body.test_delete === "1") {
+            test_id1 = null;
+            borrar_test_id1_viejo = true;
+        } else {
+            if (req.files && Object.keys(req.files).length > 0) {
+                test_id1 = req.files.test_id1;
+                test_id1 = (await uploader(test_id1.tempFilePath)).public_id;
+                borrar_test_id1_viejo = true;
+            }
+        }
+        if (borrar_test_id1_viejo && req.body.test_id1_original) {
+            await (destroy(req.body.test_id1_original));
+        }
+
         console.log(req.body.Id);
         var obj = {
             usuario: req.body.usuario,
             fecha_sesion: req.body.fecha_sesion,
             n_sesion: req.body.n_sesion,
             coachee: req.body.coachee,
-            programa: req.body.programa
+            programa: req.body.programa,
+            test_id1
         }
         console.log(obj);
         await agendaModel.modificarAgendaById(obj, req.body.Id);

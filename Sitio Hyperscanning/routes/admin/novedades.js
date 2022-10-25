@@ -1,15 +1,38 @@
 var express = require('express');
 var router = express.Router();
 var agendaModel = require('./../../models/agendaModel');
+var cloudinary = require('cloudinary').v2;
 
 router.get('/', async function (req, res, next) {
     var agenda = await agendaModel.getAgenda();
+    agenda = agenda.splice (0,5)
+    agenda = agenda.map(agenda => {
+        if (agenda.test_id1) {
+            const test_id1 = cloudinary.url(agenda.test_id1, {
+                width: 80,
+                crop: 'fill'
+            });
+            return {
+                ...agenda,
+                test_id1
+            }
+        } else {
+            return {
+                ...agenda,
+                test_id1: '/images/error- not found.png'
+            }
+        }
+    })
+
     res.render('admin/novedades', {
+        layout: 'admin/layout',
         usuario: req.session.nombre,
-        agenda,
-        layout: 'admin/layout'
+        agenda
+
     });
 });
+
+
 router.get('/eliminar/:id', async (req, res, next) => {
     var id = req.params.id;
     await agendaModel.deleteAgendaById(Id);
