@@ -5,10 +5,10 @@ var cloudinary = require('cloudinary').v2;
 
 router.get('/', async function (req, res, next) {
     var agenda = await agendaModel.getAgenda();
-    agenda = agenda.splice (0,5)
+    agenda = agenda.splice(0,5);
     agenda = agenda.map(agenda => {
-        if (agenda.test_id1) {
-            const test_id1 = cloudinary.url(agenda.test_id1, {
+        if (agenda.test_id) {
+            const test_id1 = cloudinary.url(agenda.test_id, {
                 width: 80,
                 crop: 'fill'
             });
@@ -60,7 +60,7 @@ router.post('/session_hyperscan', async (req, res, next) => {
         console.log(re.body)
         if (req.body.observador != "" && req.body____ != "" && req.body.___ != "" && ______) {
             await session_hyperscanModel.insertSession(re.body);
-            res.redirect('/login_sucess')
+            res.redirect('/login')
         } else {
             res.render('hyperscanning/session_hyperscan', {
                 error: true,

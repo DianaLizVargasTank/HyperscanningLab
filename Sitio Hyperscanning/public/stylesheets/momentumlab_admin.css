@@ -1,9 +1,5 @@
-//*html,
-body {
-  height: 100%;
-}*//
 
-body {
+.body {
   display: flex;
   align-items: center;
   padding-top: 40px;
@@ -30,6 +26,13 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+agenda {
+  background-color: #E5F4FD;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
 footer{
   background-color: #c5c6c5;
 }

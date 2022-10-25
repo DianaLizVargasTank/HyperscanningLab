@@ -12,10 +12,10 @@ const destroy = util.promisify(cloudinary.uploader.destroy);
 router.get('/', async function (req, res, next) {
     var agenda = await agendaModel.getAgenda();
     agenda = agenda.map(agenda => {
-        if (agenda.test_id1) {
-            const test_id1 = cloudinary.test_id1(agenda.test_id1, {
+        if (agenda.test_id) {
+            const test_id1 = cloudinary.test_id1(agenda.test_id, {
                 width: 80,
-                height: 90,
+                height: 80,
                 crop: 'fill'
             });
             return {
@@ -65,17 +65,17 @@ router.get('/agendar', (req, res, next) => {
 router.post('/agendar', async (req, res, next) => {
     try {
         //console.log(req.body)
-        var test_id1 = '';
+        var test_id = '';
         if (req.files && Object.keys(req.files).length > 0) {
             test_id1 = req.files.test_id1;
-            test_id1 = (await uploader(test_id1.tempFilePath)).public_id;
+            test_id = (await uploader(test_id1.tempFilePath)).public_id;
 
         }
 
         if (req.body.usuario != "" && req.body.fecha_sesion != "" && req.body.n_sesion != "" && req.body.coachee != "" && req.body.programa != "") {
             await agendaModel.insertAgenda({
                 ...req.body,
-                test_id1
+                test_id
             });
             res.redirect('/hyperscanning/hyperscanlab')
         } else {
